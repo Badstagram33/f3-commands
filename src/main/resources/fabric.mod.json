@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "f3-commands",
+  "version": "${version}",
+  "name": "f3-commands",
+  "description": "",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/Badstagram33/f3-commands"
+  },
+  "license": "MIT",
+  "icon": "assets/f3-commands/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "gay.badstagram.f3commands.client.F3CommandsClient"
+    ],
+    "main": [
+      "gay.badstagram.f3commands.F3Commands"
+    ]
+  },
+  "mixins": [
+    "f3-commands.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
