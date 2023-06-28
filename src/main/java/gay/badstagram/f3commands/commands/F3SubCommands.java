@@ -1,12 +1,17 @@
 package gay.badstagram.f3commands.commands;
 
+import com.mojang.blaze3d.platform.TextureUtil;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import gay.badstagram.f3commands.Util;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.text.ClickEvent;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+
+import java.nio.file.Path;
 
 public class F3SubCommands {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
@@ -77,6 +82,15 @@ public class F3SubCommands {
         boolean bl = mc.debugRenderer.toggleShowChunkBorder();
 
         Util.debugLog(Text.translatable(bl ? "debug.chunk_boundaries.on" : "debug.chunk_boundaries.off"));
+        return 1;
+    }
+
+    public static int dumpTextures(CommandContext<FabricClientCommandSource> context) {
+        Path path = TextureUtil.getDebugTexturePath(mc.runDirectory.toPath()).toAbsolutePath();
+        mc.getTextureManager().dumpDynamicTextures(path);
+        Text text = Text.literal(path.toString()).formatted(Formatting.UNDERLINE).styled((style) -> style.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_FILE, path.toFile().toString())));
+        Util.debugLog(Text.translatable("debug.dump_dynamic_textures", text));
+
         return 1;
     }
 }

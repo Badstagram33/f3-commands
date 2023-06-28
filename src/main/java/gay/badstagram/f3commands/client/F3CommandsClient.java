@@ -58,6 +58,11 @@ public class F3CommandsClient implements ClientModInitializer {
                     .executes(F3SubCommands::chunkBoundaries)
                     .build();
 
+            LiteralCommandNode<FabricClientCommandSource> dumpTexturesNode = ClientCommandManager
+                    .literal("dumpTextures")
+                    .executes(F3SubCommands::dumpTextures)
+                    .build();
+
             //Now stitch them together
 
             //usage: /f3 [reloadAllChunks|toggleHitBoxes|copyCoordsAsTp|clearChat|pauseOnLostFocus|advancedToolTips|reloadResourcePacks]
@@ -70,6 +75,7 @@ public class F3CommandsClient implements ClientModInitializer {
             baseNode.addChild(pauseOnLostFocusNode);
             baseNode.addChild(reloadResourcePacksNode);
             baseNode.addChild(chunkBoundariesNode);
+            baseNode.addChild(dumpTexturesNode);
         });
     }
 }
